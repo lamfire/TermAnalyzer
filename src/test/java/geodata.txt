@@ -1,0 +1,15 @@
+{"id":1,"type":"lamfire","title":"时尚码头美容美发热烫特价","longitude":116.3838183,"latitude":39.9629015}
+{"id":2,"type":"hayash","title":"审美个人美容美发套餐","longitude":116.386564,"latitude":39.966102}
+{"id":3,"type":"goloon","title":"海底捞吃300送300","longitude":116.38629,"latitude":39.9629573}
+{"id":4,"type":"lamfire","title":"仅98元！享原价335元李老爹","longitude":116.3846175,"latitude":39.9629125}
+{"id":5,"type":"hayash","title":"都美造型烫染美发护理套餐","longitude":116.38629,"latitude":39.9629573}
+{"id":6,"type":"goloon","title":"仅售55元！原价80元的老舍茶馆相声下午场","longitude":116.1799914,"latitude":39.0655391}
+{"id":7,"type":"lamfire","title":"仅售55元！原价80元的新笑声客栈早场","longitude":116.2799914,"latitude":39.1655391}
+{"id":8,"type":"hayash","title":"仅售39元（红色礼盒）！原价80元的平谷桃","longitude":116.3799914,"latitude":39.2655391}
+{"id":9,"type":"lamfire","title":"仅售38元！原价180元地质礼堂白雪公主","longitude":116.4799914,"latitude":39.3655391}
+{"id":10,"type":"hayash","title":"仅99元！享原价342.7元自助餐","longitude":116.5799914,"latitude":39.4655391}
+{"id":11,"type":"lamfire","title":"桑海教育暑期学生报名培训九折优惠券","longitude":116.6799914,"latitude":39.5655391}
+{"id":12,"type":"hayash","title":"全国发货：仅29元！贝玲妃超模粉红高光光","longitude":116.7799914,"latitude":39.6655391}
+{"id":13,"type":"goloon","title":"海之屿生态水族用品店抵用券","longitude":116.9799914,"latitude":39.7655391}
+{"id":14,"type":"lamfire","title":"小区东门时尚烫染个人护理美发套餐","longitude":116.3799914,"latitude":39.8655391}
+{"id":15,"type":"lamfire","title":"《郭德纲相声专辑》CD套装","longitude":116.8799914,"latitude":39.9655391}
