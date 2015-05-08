@@ -63,6 +63,10 @@ public final class Segmentation {
 		segs = loadSegmenter();
 	}
 
+    public SegContext getContext(){
+        return context;
+    }
+
 	/**
 	 * 获取下一个语义单元
 	 * 
