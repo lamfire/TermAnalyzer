@@ -80,7 +80,7 @@ public class TermFreq implements Comparable<TermFreq>{
 
 	@Override
 	public String toString() {
-		return this.lexeme +":" + count +"/" +String.format("%.12f",tf);
+		return "term="+this.lexeme +",count=" + count +",tf=" +String.format("%.12f",tf);
 	}
 
 }
