@@ -56,7 +56,7 @@ public class TermFreqAnalyzer {
 	 * @return
 	 * @throws java.io.IOException
 	 */
-	public long getTermCount(String lexeme)throws IOException{
+	public long getTermCount(String lexeme){
 		Integer count = getTermCountAsMap().get(lexeme);
 		if(count == null){
 			return 0;
@@ -69,7 +69,7 @@ public class TermFreqAnalyzer {
 	 * @return
 	 * @throws java.io.IOException
 	 */
-	public synchronized List<TermFreq> getSortedTermFreqs()throws IOException{
+	public synchronized List<TermFreq> getSortedTermFreqs(){
         List<TermFreq> sortedList = new LinkedList<TermFreq>();
 		Map<String,Integer> map = getTermCountAsMap();
         float length = _words.size();
@@ -82,7 +82,7 @@ public class TermFreqAnalyzer {
 		return sortedList;
 	}
 
-    public synchronized Map<String,Float>  getTermFreqs()throws IOException{
+    public synchronized Map<String,Float>  getTermFreqs(){
         Map<String,Float> map  = new HashMap<String, Float>();
         float length = _words.size();
         for(Map.Entry<String, Integer> entry : getTermCountAsMap().entrySet()){
