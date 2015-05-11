@@ -18,7 +18,7 @@ public class TF_IDFDemo {
         TermFreqInverseDocumentFreqAnalyzer idfa = new TermFreqInverseDocumentFreqAnalyzer();
         String s1 = "小林今天开开心心的去上班,却不小心迟到了";
         String s2= "今天是小明的结婚记念日,也是小林的生日";
-        String s3= "小林在上海工作,小明在广州工作";
+        String s3= "小林在北京工作,小明在广州工作";
 
         idfa.addDocument(s1);
         idfa.addDocument(s2);
