@@ -60,7 +60,7 @@ public final class Segmentation {
 		this.input = input;
 		segmentBuff = new char[BUFF_SIZE];
 		context = new SegContext(segmentBuff, isMaxWordLength);
-		segs = loadSegmenter();
+		segs = loadSegs();
 	}
 
     public SegContext getContext(){
@@ -73,7 +73,7 @@ public final class Segmentation {
 	 * @return 没有更多的词元，则返回null
 	 * @throws java.io.IOException
 	 */
-	public synchronized Lexeme next() throws IOException {
+	public synchronized Lexeme next() {
 		if (context.getResultSize() == 0) {
 			// 词元池中没有处理的结果,则进行分词处理
 			process();
@@ -88,7 +88,7 @@ public final class Segmentation {
 	 * 
 	 * @throws java.io.IOException
 	 */
-	private void process() throws IOException {
+	private void process(){
 		/*
 		 * 从reader中读取数据，填充buffer 如果reader是分次读入buffer的，那么buffer要进行移位处理
 		 * 移位处理上次读入的但未处理的数据
@@ -146,23 +146,27 @@ public final class Segmentation {
 	 * @return 返回待分析的（有效的）字串长度
 	 * @throws java.io.IOException
 	 */
-	private int fillBuffer(Reader reader) throws IOException {
+	private int fillBuffer(Reader reader){
 		int readCount = 0;
-		if (context.getBuffOffset() == 0) {
-			// 首次读取reader
-			readCount = reader.read(segmentBuff);
-		} else {
-			int offset = context.getAvailable() - context.getLastAnalyzed();
-			if (offset > 0) {
-				// 最近一次读取的>最近一次处理的，将未处理的字串拷贝到segmentBuff头部
-				System.arraycopy(segmentBuff, context.getLastAnalyzed(), this.segmentBuff, 0, offset);
-				readCount = offset;
-			}
-			// 继续读取reader ，以onceReadIn - onceAnalyzed为起始位置，继续填充segmentBuff剩余的部分
-			readCount += reader.read(segmentBuff, offset, BUFF_SIZE - offset);
-		}
-		// 记录最后一次从Reader中读入的可用字符长度
-		context.setAvailable(readCount);
+        try{
+            if (context.getBuffOffset() == 0) {
+                // 首次读取reader
+                readCount = reader.read(segmentBuff);
+            } else {
+                int offset = context.getAvailable() - context.getLastAnalyzed();
+                if (offset > 0) {
+                    // 最近一次读取的>最近一次处理的，将未处理的字串拷贝到segmentBuff头部
+                    System.arraycopy(segmentBuff, context.getLastAnalyzed(), this.segmentBuff, 0, offset);
+                    readCount = offset;
+                }
+                // 继续读取reader ，以onceReadIn - onceAnalyzed为起始位置，继续填充segmentBuff剩余的部分
+                readCount += reader.read(segmentBuff, offset, BUFF_SIZE - offset);
+            }
+            // 记录最后一次从Reader中读入的可用字符长度
+            context.setAvailable(readCount);
+        }catch (Exception e){
+
+        }
 		return readCount;
 	}
 
@@ -199,7 +203,7 @@ public final class Segmentation {
 	 * 
 	 * @return List<ISegmenter>
 	 */
-	public static List<Seg> loadSegmenter() {
+	public static List<Seg> loadSegs() {
 		// 初始化词典单例
 		Dictionary.getInstance();
 		List<Seg> segs = new ArrayList<Seg>(4);
@@ -212,7 +216,7 @@ public final class Segmentation {
 		return segs;
 	}
 
-    public synchronized List<String> split() throws IOException {
+    public synchronized List<String> split() {
         List<String> result = new ArrayList<String>();
         Lexeme lex = this.next();
         while(lex != null){

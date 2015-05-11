@@ -17,7 +17,7 @@ public class TermFreqAnalyzer {
 	private String content;
     private List<String> _words;
 	
-	public TermFreqAnalyzer(String content)throws IOException{
+	public TermFreqAnalyzer(String content){
 		this.content = content;
 	}
 
@@ -25,7 +25,7 @@ public class TermFreqAnalyzer {
 	 * 获得分词频
 	 * @throws java.io.IOException
 	 */
-	public synchronized Map<String, Integer> getTermCountAsMap() throws IOException{
+	public synchronized Map<String, Integer> getTermCountAsMap(){
 		if(termCountMap != null){
 			return termCountMap;
 		}

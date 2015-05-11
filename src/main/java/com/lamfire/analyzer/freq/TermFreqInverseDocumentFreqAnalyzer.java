@@ -82,7 +82,12 @@ public class TermFreqInverseDocumentFreqAnalyzer {
         Map<String,Float> idfMap = getInverseDocumentFreq();
         List<TermFreq> list = tfAnalyzer.getSortedTermFreqs();
         for(TermFreq tf : list){
-            tf.setFrequency(tf.getFrequency() * idfMap.get(tf.getLexeme()));
+            Float idf = idfMap.get(tf.getTerm());
+            if(idf != null){
+                tf.setFrequency(tf.getFrequency() * idf);
+            }else{
+                tf.setFrequency(1.0f);
+            }
         }
         Collections.sort(list);
         return list;

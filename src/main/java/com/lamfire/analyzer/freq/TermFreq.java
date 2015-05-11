@@ -7,7 +7,7 @@ package com.lamfire.analyzer.freq;
  */
 
 public class TermFreq implements Comparable<TermFreq>{
-	private String lexeme;
+	private String term;
 	private int count;
     private float frequency;
 
@@ -17,21 +17,21 @@ public class TermFreq implements Comparable<TermFreq>{
 	
 	public TermFreq(String lexeme, int freq,float frequency) {
 		super();
-		this.lexeme = lexeme;
+		this.term = lexeme;
 		this.count = freq;
         this.frequency = frequency;
 	}
 	
 	
 
-	public String getLexeme() {
-		return lexeme;
+	public String getTerm() {
+		return term;
 	}
 
 
 
-	public void setLexeme(String lexeme) {
-		this.lexeme = lexeme;
+	public void setTerm(String term) {
+		this.term = term;
 	}
 
 
@@ -58,7 +58,7 @@ public class TermFreq implements Comparable<TermFreq>{
 	public boolean equals(Object obj) {
 		if(obj instanceof TermFreq){
 			TermFreq o = (TermFreq)obj;
-			return this.lexeme.equals(o.lexeme) && this.count == o.count;
+			return this.term.equals(o.term) && this.count == o.count;
 		}
 		return false;
 	}
@@ -67,7 +67,7 @@ public class TermFreq implements Comparable<TermFreq>{
 
 	@Override
 	public int hashCode() {
-		return this.count * this.lexeme.hashCode();
+		return this.count * this.term.hashCode();
 	}
 
 
@@ -84,7 +84,7 @@ public class TermFreq implements Comparable<TermFreq>{
 
 	@Override
 	public String toString() {
-		return "term="+this.lexeme +",count=" + count +",frequency=" +String.format("%.12f", frequency);
+		return "term="+this.term +",count=" + count +",frequency=" +String.format("%.12f", frequency);
 	}
 
 }
