@@ -10,9 +10,10 @@ public class LexemeFreqDemo {
 
 	public static void main(String[] args) throws IOException {
 		TermFreqAnalyzer freq = new TermFreqAnalyzer(Datas.ContextString);
-		List<TermFreq> list = freq.getTermFreqs();
+		List<TermFreq> list = freq.getSortedTermFreqs();
 		for(TermFreq f : list){
 			System.out.println(f);
 		}
 	}
 }
+                                                                                                                                              ;

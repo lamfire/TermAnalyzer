@@ -2,11 +2,7 @@ package com.lamfire.analyzer.freq;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import com.lamfire.analyzer.Segmentation;
 
@@ -17,9 +13,8 @@ import com.lamfire.analyzer.Segmentation;
  */
 
 public class TermFreqAnalyzer {
-	private Map<String, Integer> lexemes = null;
+	private Map<String, Integer> termCountMap = null;
 	private String content;
-	private List<TermFreq> sortedList;
     private List<String> _words;
 	
 	public TermFreqAnalyzer(String content)throws IOException{
@@ -30,25 +25,30 @@ public class TermFreqAnalyzer {
 	 * 获得分词频
 	 * @throws java.io.IOException
 	 */
-	public synchronized Map<String, Integer> getTermCount() throws IOException{
-		if(lexemes != null){
-			return lexemes;
+	public synchronized Map<String, Integer> getTermCountAsMap() throws IOException{
+		if(termCountMap != null){
+			return termCountMap;
 		}
-		lexemes = new TreeMap<String, Integer>();
+		termCountMap = new TreeMap<String, Integer>();
 		StringReader reader = new StringReader(this.content);
 		Segmentation seg = new Segmentation(reader,true);
         _words = seg.split();
         for(String word : _words){
-            Integer count = lexemes.get(word);
-            if(count == null){
-                lexemes.put(word,1);
-            }else{
-                lexemes.put(word,count +1);
-            }
+            countTerm(word);
         }
 
-		return lexemes;
+		return termCountMap;
 	}
+
+    private synchronized void countTerm(String term){
+        Integer count = termCountMap.get(term);
+        if(count == null){
+            count = 1;
+        }else{
+            count++;
+        }
+        termCountMap.put(term, count);
+    }
 
 	/**
 	 * 获得指定词的词频
@@ -57,7 +57,7 @@ public class TermFreqAnalyzer {
 	 * @throws java.io.IOException
 	 */
 	public long getTermCount(String lexeme)throws IOException{
-		Integer count = getTermCount().get(lexeme);
+		Integer count = getTermCountAsMap().get(lexeme);
 		if(count == null){
 			return 0;
 		}
@@ -69,12 +69,9 @@ public class TermFreqAnalyzer {
 	 * @return
 	 * @throws java.io.IOException
 	 */
-	public synchronized List<TermFreq> getTermFreqs()throws IOException{
-		if(sortedList != null){
-			return sortedList;
-		}
-		sortedList = new LinkedList<TermFreq>();
-		Map<String,Integer> map = getTermCount();
+	public synchronized List<TermFreq> getSortedTermFreqs()throws IOException{
+        List<TermFreq> sortedList = new LinkedList<TermFreq>();
+		Map<String,Integer> map = getTermCountAsMap();
         float length = _words.size();
 		for(Map.Entry<String, Integer> entry : map.entrySet()){
             Integer count = entry.getValue();
@@ -84,4 +81,15 @@ public class TermFreqAnalyzer {
 		Collections.sort(sortedList);
 		return sortedList;
 	}
+
+    public synchronized Map<String,Float>  getTermFreqs()throws IOException{
+        Map<String,Float> map  = new HashMap<String, Float>();
+        float length = _words.size();
+        for(Map.Entry<String, Integer> entry : getTermCountAsMap().entrySet()){
+            Integer count = entry.getValue();
+            Float freq = (count.floatValue() / length );
+            map.put(entry.getKey(),freq);
+        }
+        return map;
+    }
 }

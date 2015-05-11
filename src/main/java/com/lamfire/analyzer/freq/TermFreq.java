@@ -9,13 +9,17 @@ package com.lamfire.analyzer.freq;
 public class TermFreq implements Comparable<TermFreq>{
 	private String lexeme;
 	private int count;
-    private float tf;
+    private float frequency;
+
+    public TermFreq() {
+
+    }
 	
-	public TermFreq(String lexeme, int freq,float tf) {
+	public TermFreq(String lexeme, int freq,float frequency) {
 		super();
 		this.lexeme = lexeme;
 		this.count = freq;
-        this.tf = tf;
+        this.frequency = frequency;
 	}
 	
 	
@@ -42,12 +46,12 @@ public class TermFreq implements Comparable<TermFreq>{
 		this.count = count;
 	}
 
-    public float getTf() {
-        return tf;
+    public float getFrequency() {
+        return frequency;
     }
 
-    public void setTf(float tf) {
-        this.tf = tf;
+    public void setFrequency(float frequency) {
+        this.frequency = frequency;
     }
 
     @Override
@@ -69,10 +73,10 @@ public class TermFreq implements Comparable<TermFreq>{
 
 	@Override
 	public int compareTo(TermFreq o) {
-		if(this.count > o.getCount()){
+		if(this.frequency > o.getFrequency()){
 			return 1;
 		}
-		if(this.count < o.getCount()){
+		if(this.frequency < o.getFrequency()){
 			return -1;
 		}
 		return 0;
@@ -80,7 +84,7 @@ public class TermFreq implements Comparable<TermFreq>{
 
 	@Override
 	public String toString() {
-		return "term="+this.lexeme +",count=" + count +",tf=" +String.format("%.12f",tf);
+		return "term="+this.lexeme +",count=" + count +",frequency=" +String.format("%.12f", frequency);
 	}
 
 }
