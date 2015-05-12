@@ -50,6 +50,9 @@ public abstract class TermFreqInverseDocumentFreqBaseAnalyzer implements TermFre
 
     public Float getInverseDocumentFreq(String term){
         Integer count = getTermCount(term);
+        if(count == null || count ==0){
+            return 0f;
+        }
         Float freq = (float)Math.log(getDocumentNumber() / count.floatValue());
         return freq;
     }
