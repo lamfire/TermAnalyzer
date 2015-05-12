@@ -13,17 +13,17 @@ public class DefaultTermFreqInverseDocumentFreqAnalyzer extends TermFreqInverseD
     private final Map<String, Integer> termCountMap = new HashMap<String, Integer>();
 
     @Override
-    void setTermCount(String term, int count) {
+    protected void setTermCount(String term, int count) {
         termCountMap.put(term,count);
     }
 
-    int getTermCount(String term){
+    protected int getTermCount(String term){
         Integer count =  termCountMap.get(term);
         return count == null? 0 : count;
     }
 
     @Override
-    int getDocumentNumber() {
+    protected int getDocumentNumber() {
         return super.getAddDocumentCount();
     }
 }

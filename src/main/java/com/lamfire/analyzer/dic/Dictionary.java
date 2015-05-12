@@ -384,7 +384,7 @@ public class Dictionary {
 	
 	/**
 	 * 加载停止词词典
-	 * @param extDict
+	 * @param is
 	 * @throws java.io.IOException
 	 */
 	public void loadToStopWordDict(InputStream is) throws IOException{
@@ -406,7 +406,7 @@ public class Dictionary {
 	
 	/**
 	 * 词典初始化
-	 * 由于IK Analyzer的词典采用Dictionary类的静态方法进行词典初始化
+	 * 词典采用Dictionary类的静态方法进行词典初始化
 	 * 只有当Dictionary类被实际调用时，才会开始载入词典，
 	 * 这将延长首次分词操作的时间
 	 * 该方法提供了一个在应用加载阶段就初始化字典的手段
@@ -421,13 +421,10 @@ public class Dictionary {
 	 * 加载扩展的词条
 	 * @param extWords Collection<String>词条列表
 	 */
-	public static void loadExtendWords(Collection<String> extWords){
+	public void addToMainWords(Collection<String> extWords){
 		if(extWords != null){
 			for(String extWord : extWords){
-				if (extWord != null) {
-					//加载扩展词条到主内存词典中
-					singleton.mainDict.fillSegment(extWord.trim().toCharArray());
-				}
+                addToMainWords(extWord);
 			}
 		}
 	}
@@ -436,16 +433,31 @@ public class Dictionary {
 	 * 加载扩展的停止词条
 	 * @param extStopWords Collection<String>词条列表
 	 */
-	public static void loadExtendStopWords(Collection<String> extStopWords){
+	public void addToStopWords(Collection<String> extStopWords){
 		if(extStopWords != null){
 			for(String extStopWord : extStopWords){
-				if (extStopWord != null) {
-					//加载扩展的停止词条
-					singleton.stopWords.fillSegment(extStopWord.trim().toCharArray());
-				}
+                addToStopWords(extStopWord);
 			}
 		}
 	}
+
+    public void addToMainWords(String term){
+        if(term != null){
+            //加载扩展词条到主内存词典中
+            singleton.mainDict.fillSegment(term.trim().toCharArray());
+        }
+    }
+
+    /**
+     * 加载扩展的停止词条
+     * @param term 词条列表
+     */
+    public void addToStopWords(String term){
+        if (term != null) {
+            //加载扩展的停止词条
+            singleton.stopWords.fillSegment(term.trim().toCharArray());
+        }
+    }
 	
 	/**
 	 * 检索匹配主词典
