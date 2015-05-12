@@ -17,11 +17,11 @@ public abstract class TermFreqInverseDocumentFreqBaseAnalyzer implements TermFre
         incrementTermCount(term,1);
     }
 
-    abstract void setTermCount(String term,int count);
+    protected abstract void setTermCount(String term,int count);
 
-    abstract int getTermCount(String term);
+    protected abstract int getTermCount(String term);
 
-    abstract int getDocumentNumber();
+    protected abstract int getDocumentNumber();
 
     synchronized void incrementTermCount(String term,int increment){
         Integer count = getTermCount(term);
