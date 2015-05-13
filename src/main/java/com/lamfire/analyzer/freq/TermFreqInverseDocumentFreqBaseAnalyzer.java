@@ -53,7 +53,8 @@ public abstract class TermFreqInverseDocumentFreqBaseAnalyzer implements TermFre
         if(count == null || count ==0){
             count= 1;
         }
-        Float freq = (float)Math.log(getDocumentNumber() / count.floatValue());
+        int documentNumber = getDocumentNumber();
+        Float freq = (float)Math.log(documentNumber / count.floatValue());
         return freq;
     }
 
