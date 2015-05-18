@@ -238,8 +238,9 @@ public final class Lexeme implements Comparable<Lexeme>{
 	
 	public String toString(){
 		StringBuffer strbuf = new StringBuffer();
+        strbuf.append(" {");
 		strbuf.append(this.getBeginPosition()).append("-").append(this.getEndPosition());
-		strbuf.append(" : ").append(this.lexemeText).append(" : \t");
+		strbuf.append(" : ").append(this.lexemeText).append(" : ");
 		switch(lexemeType) {
 			case TYPE_CJK_NORMAL : 
 				strbuf.append("NORMAL");
@@ -264,6 +265,7 @@ public final class Lexeme implements Comparable<Lexeme>{
 				break;
 
 		}
+        strbuf.append("}");
 		return strbuf.toString();
 	}
 

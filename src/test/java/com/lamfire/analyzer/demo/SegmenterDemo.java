@@ -13,9 +13,8 @@ public class SegmenterDemo {
 
 	public static void main(String[] args) throws IOException{
 		
-		StringReader reader = new StringReader("在广州市新塘镇有个自称叫hayash的华人算命先生,今年28岁.");
-		//StringReader reader = new StringReader(testString);
-		
+		StringReader reader = new StringReader("我不想要太多的粮食");
+
 		Segmentation seg = new Segmentation(reader, true);
 
 		long begin = System.currentTimeMillis();   
