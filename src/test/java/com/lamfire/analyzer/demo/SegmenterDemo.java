@@ -8,24 +8,41 @@ import java.io.StringReader;
 
 import com.lamfire.analyzer.Lexeme;
 import com.lamfire.analyzer.Segmentation;
+import com.lamfire.analyzer.dic.Dictionary;
+import com.lamfire.analyzer.dic.Hit;
 
 public class SegmenterDemo {
 
 	public static void main(String[] args) throws IOException{
 		
-		StringReader reader = new StringReader("我不想要太多的粮食");
+		char[] array = (Datas.ContextString).toCharArray();
 
-		Segmentation seg = new Segmentation(reader, true);
+        Dictionary dic = Dictionary.getInstance();
 
-		long begin = System.currentTimeMillis();   
-		Lexeme lex = seg.next();
-		while(lex != null){
-			System.out.println(lex.getLexemeText() +"\t\t\t"+lex.getLexemeTypeName());
-			lex = seg.next();
-		}
+        int startIndex = 0;
 
-        long end = System.currentTimeMillis();
-        System.out.println("耗时 : " + (end - begin) + "ms");
+        while(startIndex < array.length){
+            for(int i=7;i>0;i--){
+                Hit hit = Dictionary.matchInMainDict(array, startIndex, i);
+                if(hit.isMatch()){
+                    System.out.println(new String(array,startIndex,i));
+                    startIndex+= i;
+                    break;
+                }else if(i == 1){
+
+
+
+                    hit = Dictionary.matchInSurnameDict(array, startIndex, i);
+                    if(hit.isMatch()){
+                        System.out.println(new String(array,startIndex,i) + " ------------------ surname");
+                    }else{
+                        System.out.println(new String(array,startIndex,i));
+                    }
+
+                    startIndex++;
+                }
+            }
+        }
 
 	}
 	
