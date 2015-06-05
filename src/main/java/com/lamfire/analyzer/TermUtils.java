@@ -3,6 +3,7 @@ package com.lamfire.analyzer;
 import com.lamfire.analyzer.dic.Dictionary;
 import com.lamfire.analyzer.dic.Hit;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class TermUtils {
                 }
             }
         }
+        Collections.reverse(_result);
         return _result;
     }
 }

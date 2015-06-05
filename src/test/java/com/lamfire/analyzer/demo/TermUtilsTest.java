@@ -15,12 +15,19 @@ import java.util.List;
 public class TermUtilsTest {
 
     public static void main(String[] args) {
-        List<String> terms = TermUtils.maxLengthSegmentWithRevers(Datas.ContextString, 8);
+        List<String> terms = TermUtils.maxLengthSegment(Datas.ContextString, 8);
 
-        Collections.reverse(terms);
+        List<String> terms2 = TermUtils.maxLengthSegmentWithRevers(Datas.ContextString, 8);
+
+
         System.out.println("----------------------------");
-        for(String s:terms){
-            System.out.println(s);
+        int len = terms.size();
+        if(len > terms2.size()){
+            len = terms2.size();
+        }
+
+        for(int i = 0; i< terms.size() ; i++){
+            System.out.println(terms.get(i) +" \t\t\t\t\t\t\t\t"+ terms2.get(i));
         }
     }
 }
